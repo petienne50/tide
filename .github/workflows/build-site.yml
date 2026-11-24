@@ -1,6 +1,20 @@
 name: Build static site
 on:
   workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - 'partials/**'
+      - 'templates/**'
+      - 'pages/**'
+      - 'content/**'
+      - 'lib/**'
+      - 'build.cjs'
+      - 'out/site.css'
+      - 'out/site.js'
+concurrency:
+  group: tide-static-build
+  cancel-in-progress: true
 permissions:
   contents: write
 jobs:
@@ -19,10 +33,6 @@ jobs:
       - run: |
           git config user.name "TIDE site builder"
           git config user.email "site-builder@users.noreply.github.com"
-          git add out
+          git add pages out
           git diff --cached --quiet || git commit -m "Rebuild static pages from edited content"
           git push
-      - uses: actions/upload-artifact@v4
-        with:
-          name: tide-static-site
-          path: out

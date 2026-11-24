@@ -6,9 +6,32 @@ The deployable website is `out/`. It contains plain HTML, CSS, JavaScript, photo
 
 Each page is stored in `content/` as a JSON file with a title, fixed URL, header photo, and formatted HTML body. `.pages.yml` configures Pages CMS to edit these fields with formatting controls at https://app.pagescms.org. The owner has connected Pages CMS to `petienne50/tide`. Choose that repository and open Website pages. Preserve page URLs when changing text.
 
-Install dependencies with `pnpm install --frozen-lockfile`, then run `node build.cjs`. The build updates the static HTML files in `out/`. A manually triggered GitHub workflow is prepared to rebuild and commit those files and provide a downloadable site artifact. It does not deploy to the live TIDE domain or the private Sites preview.
+Install dependencies with `pnpm install --frozen-lockfile`, then run `node build.cjs`. The build updates the static HTML files in `out/`. The GitHub workflow rebuilds and commits those files when the source is changed, and can also be run manually. The generated files stay in the repository, without storing another full copy as a workflow artifact. The workflow does not deploy to the live TIDE domain or the private Sites preview.
 
-`navigation.html` stores the nested navigation. `out/site.css` and `out/site.js` hold the design and interactions. `archives.json` stores category/tag listings, and `resources.json` records downloaded-resource addresses. The private Sites review uses smaller photographs and links to document downloads on their original servers; the full `out/` version carries its own document files.
+## Editing layouts and shared sections
+
+Edit these source files in GitHub or a code editor:
+
+| File | What it changes |
+| --- | --- |
+| `partials/header.html` | Shared logo, contact strip, and header structure |
+| `partials/menu.html` | Shared navigation links and submenus |
+| `partials/footer.html` | Shared footer content and links |
+| `partials/head.html` | Shared page metadata, stylesheet, and script links |
+| `templates/document.html` | The common HTML document around every page |
+| `templates/page.html` | Default photo header and article layout |
+| `pages/<page-name>.html` | Layout changes for one page only |
+| `content/<page-name>.json` | Page wording and photo selection, also editable through Pages CMS |
+
+For example, `pages/paynes-creek-national-park.html` controls `/paynes-creek-national-park/`. Nested addresses use double underscores, such as `pages/our-story__management-plans.html`.
+
+Each normal page initially includes `{{> templates/page.html}}`. To customize only that page, replace this include with a copy of the HTML from `templates/page.html`, then edit its layout. Keep `{{{body}}}` where the text from Pages CMS should appear. Available page values are `title`, `intro`, `picture`, `heroClass`, `heroCaption`, `sectionLabel`, `storyLink`, `contentClass`, and `body`. Use `{{title}}` for escaped text and triple braces for an HTML fragment. Generated archive, directory, and staff pages use `{{{main}}}` for their generated content.
+
+The header, menu, and footer are included once by the document template. Do not paste them into individual page files. An edit to a shared source file applies to every generated page on the next build. GitHub now runs the build automatically when shared templates, page layouts, or page text are saved on `main`. The manual **Build website files** action remains available. Publishing the rebuilt files to the live host is still a separate step.
+
+Do not make lasting layout edits to `out/**/index.html`: these are generated files and will be replaced when the site rebuilds. The published output is ordinary standalone HTML, so navigation and shared sections work without browser-side includes or JavaScript.
+
+`out/site.css` and `out/site.js` hold the design and interactions. `archives.json` stores category/tag listings, and `resources.json` records downloaded-resource addresses. The private Sites review uses smaller photographs and links to document downloads on their original servers; the full `out/` version carries its own document files.
 
 ## Migration archive
 
