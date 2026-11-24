@@ -1,8 +1,8 @@
 const fs=require('fs'),path=require('path'),ch=require('cheerio');
 const root=__dirname, out=path.join(root,'out'),content=path.join(root,'content');
-const save=(p,d)=>{fs.mkdirSync(path.dirname(p),{recursive:true});fs.writeFileSync(p,d)};
+const save=(p,d)=>{if(path.basename(p)==='.pages.yml'&&fs.existsSync(p))return;fs.mkdirSync(path.dirname(p),{recursive:true});fs.writeFileSync(p,d)};
 const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-const archive=fs.existsSync(path.join(root,'archive/content.json'))?JSON.parse(fs.readFileSync(path.join(root,'archive/content.json'))):{pages:[],posts:[],media:[]}, all=[...archive.pages,...archive.posts];
+const archive=process.env.TIDE_CONTENT_ONLY!=='1'&&fs.existsSync(path.join(root,'archive/content.json'))?JSON.parse(fs.readFileSync(path.join(root,'archive/content.json'))):{pages:[],posts:[],media:[]}, all=[...archive.pages,...archive.posts];
 const originals=new Map();for(const m of archive.media){let u=m.media_details?.original_image?new URL(m.media_details.original_image,m.source_url).href:m.source_url;originals.set(m.source_url,u);for(const v of Object.values(m.media_details?.sizes||{}))if(v.source_url)originals.set(v.source_url,u)}
 function local(u){try{let a=new URL(u,'https://tidebelize.org');if(/^(www\.)?tidebelize\.org$/.test(a.hostname))return decodeURIComponent(a.pathname)+a.search+a.hash;return u}catch{return u}}
 function image(u){let full=originals.get(u)||u;let file=path.join(out,decodeURIComponent(new URL(full,'https://tidebelize.org').pathname));return local(fs.existsSync(file)?full:u)}

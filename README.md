@@ -4,11 +4,11 @@ The deployable website is `out/`. It contains plain HTML, CSS, JavaScript, photo
 
 ## Editing
 
-Each page is stored in `content/` as a JSON file with a title, fixed URL, header photo, and formatted HTML body. `.pages.yml` configures Pages CMS to edit these fields with formatting controls after the repository is connected at https://app.pagescms.org. The connection is not active yet. Preserve page URLs when changing text.
+Each page is stored in `content/` as a JSON file with a title, fixed URL, header photo, and formatted HTML body. `.pages.yml` configures Pages CMS to edit these fields with formatting controls at https://app.pagescms.org. The owner has connected Pages CMS to `petienne50/tide`. Choose that repository and open Website pages. Preserve page URLs when changing text.
 
 Install dependencies with `pnpm install --frozen-lockfile`, then run `node build.cjs`. The build updates the static HTML files in `out/`. A manually triggered GitHub workflow is prepared to rebuild and commit those files and provide a downloadable site artifact. It does not deploy to the live TIDE domain or the private Sites preview.
 
-`navigation.html` stores the nested navigation. `out/site.css` and `out/site.js` hold the design and interactions. `archives.json` stores category/tag listings, and `resources.json` records downloaded-resource addresses.
+`navigation.html` stores the nested navigation. `out/site.css` and `out/site.js` hold the design and interactions. `archives.json` stores category/tag listings, and `resources.json` records downloaded-resource addresses. The private Sites review uses smaller photographs and links to document downloads on their original servers; the full `out/` version carries its own document files.
 
 ## Migration archive
 
@@ -22,4 +22,4 @@ Contact and grievance forms link to their original pages until replacement form 
 
 ## Validation
 
-`node check.cjs` audits generated local links, image references, and oversized files and writes `archive/validation.json`. Create `archive/` before running it in a fresh checkout. Browser review covered the homepage, a protected-area page, navigation, and search. Full staff-editor sign-in, form submission, and independent hosting deployment remain integration work.
+`node check.cjs` audits generated local links, image references, and oversized files and writes `archive/validation.json`. Browser review covered the homepage, a protected-area page, navigation, and search. Pages CMS is configured and the owner reports that its GitHub connection is complete; no test edit was submitted through its interface. Form submission and deployment to the final independent host remain integration work.

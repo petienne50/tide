@@ -1,6 +1,6 @@
 media:
-  input: out/uploads
-  output: /uploads
+  input: out/wp-content/uploads
+  output: /wp-content/uploads
 content:
   - name: pages
     label: Website pages
