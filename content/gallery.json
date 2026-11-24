@@ -1,0 +1,7 @@
+{
+  "title": "Gallery",
+  "url": "/gallery/",
+  "type": "page",
+  "hero": "/wp-content/uploads/2023/05/Fondo-BD.jpg",
+  "body": "<div id=\"gallery-1\"><figure>\n<a href=\"/wp-content/uploads/2023/05/Fondo-BD.jpg\"><img loading=\"lazy\" src=\"/wp-content/uploads/2023/05/Fondo-BD.jpg\" alt=\"\"></a>\n</figure><figure>\n<a href=\"/wp-content/uploads/2023/05/GOPR1698-1.jpg\"><img loading=\"lazy\" src=\"/wp-content/uploads/2023/05/GOPR1698-1.jpg\" alt=\"\"></a>\n</figure><figure>\n<a href=\"/wp-content/uploads/2023/05/GPTempDownload-3.jpg\"><img loading=\"lazy\" src=\"/wp-content/uploads/2023/05/GPTempDownload-3.jpg\" alt=\"\"></a>\n</figure><figure>\n<a href=\"/wp-content/uploads/2023/05/GOPR1702.jpg\"><img loading=\"lazy\" src=\"/wp-content/uploads/2023/05/GOPR1702.jpg\" alt=\"\"></a>\n</figure>\n</div>"
+}

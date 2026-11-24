@@ -1,0 +1,11 @@
+node_modules/
+archive/
+dist/
+downloads/
+*.tar.gz
+original.html
+festival.html
+festival.css
+*-1.json
+pages.json
+sitemap.xml

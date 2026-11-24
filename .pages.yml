@@ -1,0 +1,31 @@
+media:
+  input: out/uploads
+  output: /uploads
+content:
+  - name: pages
+    label: Website pages
+    type: collection
+    path: content
+    format: json
+    fields:
+      - name: title
+        label: Page title
+        type: string
+      - name: url
+        label: Page URL (keep unchanged)
+        type: string
+      - name: type
+        type: string
+      - name: hero
+        label: Header photograph
+        type: image
+      - name: body
+        label: Page text
+        type: rich-text
+        options:
+          format: html
+          switcher: true
+actions:
+  - name: build-site
+    label: Build website files
+    workflow: build-site.yml

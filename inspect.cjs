@@ -1,0 +1,2 @@
+const fs=require('fs'),ch=require('cheerio'),a=JSON.parse(fs.readFileSync('archive/content.json'));
+for(let slug of ['port-honduras-marine-reserve','paynes-creek-national-park','grievance','donate']){let p=a.pages.find(x=>x.slug===slug);let s=ch.load(p.content.rendered);console.log(slug,'images',s('img').map((i,e)=>s(e).attr('src')).get().slice(0,6));console.log('forms',s('form').map((i,e)=>s.html(e).slice(0,400)).get(),'shortcodes',s.text().match(/\[[^\]]+\]/g));}let s=ch.load(fs.readFileSync('original.html'));console.log(s('nav ul').first().html().slice(0,1200));

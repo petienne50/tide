@@ -1,0 +1,8 @@
+{
+  "name": "tide-belize-static",
+  "private": true,
+  "scripts": { "build": "node build.cjs", "check": "node check.cjs" },
+	"dependencies": {
+		"cheerio": "^1.2.0"
+	}
+}
